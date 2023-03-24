@@ -1,6 +1,8 @@
 import django_filters
-from recopes.models import Recipe, Tag
+from django_filters import rest_framework as filter
+
 from users.models import User
+from recopes.models import Recipe, Tag
 
 
 class RecipeFilter(django_filters.FilterSet):
@@ -10,7 +12,10 @@ class RecipeFilter(django_filters.FilterSet):
         queryset=Tag.objects.all(),
     )
     author = django_filters.ModelChoiceFilter(queryset=User.objects.all())
+    is_favorited = filter.BooleanFilter(method='get_favorite')
+    is_in_shopping_cart = filter.BooleanFilter(
+        method='get_is_in_shopping_cart')
 
     class Meta:
         model = Recipe
-        fields = ('tags', 'author')
+        fields = ('tags', 'author', 'is_favorited', 'is_in_shopping_cart')

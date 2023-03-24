@@ -1,42 +1,36 @@
 from rest_framework import viewsets
-from api.serializers import (
-    TagSerializer,
-    IngredientSerializer,
-    RecipeSerializer,
-    SubscriptionSerializer,
-    GetSubscriptionSerializer,
-    GetRecipeSerializer,
-    FavoriteSerializer,
-    PostFavoriteSerializer,
-    ShoppingCartSerializer
-)
-from recopes.models import (
-    Tag,
-    Recipe,
-    Ingredient,
-    Subscription,
-    Favorite,
-    ShopCart,
-    IngredientInRecipe
-)
-from api.permissions import IsAuthorOrReadOnly
-from rest_framework.permissions import IsAuthenticated
-from users.models import User
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import action
-from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
-from django_filters.rest_framework import DjangoFilterBackend
-from api.filters import RecipeFilter
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from django.db.models import Sum
 from django.http import HttpResponse
-from rest_framework.decorators import api_view, permission_classes
+from django_filters.rest_framework import DjangoFilterBackend
+from django.shortcuts import get_object_or_404
+from rest_framework import mixins
+
+from api.serializers import (FavoriteSerializer, IngredientSerializer,
+                             RecipeSerializer, GetRecipeSerializer,
+                             TagSerializer, ShoppingCartSerializer,
+                             PostFavoriteSerializer, SubscriptionSerializer,
+                             GetSubscriptionSerializer)
+
+from users.models import User
+from api.permissions import IsAuthorOrReadOnly
+from api.filters import RecipeFilter
+from recopes.models import (Favorite, Ingredient,
+                            IngredientInRecipe, Recipe,
+                            Subscription, ShopCart, Tag)
 
 
-class TagViewSet(viewsets.ModelViewSet):
+class TagViewSet(mixins.CreateModelMixin,
+                 mixins.ListModelMixin,
+                 mixins.DestroyModelMixin,
+                 viewsets.GenericViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
@@ -105,42 +99,6 @@ class GetSubscriptionsView(generics.ListAPIView):
             page, many=True, context={'request': request}
         )
         return self.get_paginated_response(serializer.data)
-
-
-class SubscribeView(APIView):
-    """ Операция подписки/отписки. """
-
-    permission_classes = [IsAuthenticated, ]
-
-    def post(self, request, id):
-        author = get_object_or_404(User, id=id)
-        data = {
-            'user': request.user.id,
-            'author': id
-        }
-        serializer = SubscriptionSerializer(
-            data=data,
-            context={'request': request}
-        )
-        if request.user == author:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, id):
-        author = get_object_or_404(User, id=id)
-        if Subscription.objects.filter(
-            user=request.user,
-            author=author
-        ).exists():
-            subscription = get_object_or_404(
-                Subscription, user=request.user, author=author
-            )
-            subscription.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class FavoriteViewSet(viewsets.ModelViewSet):

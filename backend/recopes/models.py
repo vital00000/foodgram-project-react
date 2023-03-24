@@ -111,6 +111,9 @@ class IngredientInRecipe(models.Model):
         verbose_name = 'Ингридиент в рецепте'
         verbose_name_plural = 'Ингридиенты в рецептах'
 
+    def __str__(self):
+        return f'{self.recipe} добавлен в избранное {self.ingredient}'
+
 
 class ShopCart(models.Model):
     user = models.ForeignKey(
@@ -184,3 +187,6 @@ class Favorite(models.Model):
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранные'
         ordering = ('id',)
+
+    def __str__(self):
+        return f'{self.user} добавлен в избранное {self.recipe}'
