@@ -6,13 +6,13 @@ from users.views import SubscribeView
 from api.views import (GetSubscriptionsView, SubscriptionViewSet)
 
 
-app_name = 'api'
-
-router = routers.DefaultRouter()
-router.register(r'subscriptions', SubscriptionViewSet, basename='subscription')
+v1_router = routers.DefaultRouter()
+v1_router.register(
+    r'subscriptions', SubscriptionViewSet, basename='subscription'
+)
 
 urlpatterns = [
     path('api/users/subscriptions/', GetSubscriptionsView.as_view(),),
     path('api/users/<int:id>/subscribe/', SubscribeView.as_view(),),
-    path('api/', include(router.urls)),
+    path('api/', include(v1_router.urls)),
 ]

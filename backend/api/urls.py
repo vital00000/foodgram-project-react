@@ -14,11 +14,11 @@ from api.views import (
 
 app_name = 'api'
 
-router = routers.DefaultRouter()
-router.register(r'tags', TagViewSet, basename='tag')
-router.register(r'recipes', RecipeViewSet, basename='recipe')
-router.register(r'ingredients', IngredientViewSet, basename='ingredient')
-router.register(r'favorites', FavoriteViewSet, basename='favorite')
+v1_router = routers.DefaultRouter()
+v1_router.register(r'tags', TagViewSet, basename='tag')
+v1_router.register(r'recipes', RecipeViewSet, basename='recipe')
+v1_router.register(r'ingredients', IngredientViewSet, basename='ingredient')
+v1_router.register(r'favorites', FavoriteViewSet, basename='favorite')
 
 
 urlpatterns = [
@@ -33,5 +33,5 @@ urlpatterns = [
         download_shopping_cart,
         name='download_shopping_cart'
     ),
-    path('api/', include(router.urls)),
+    path('api/', include(v1_router.urls)),
 ]
