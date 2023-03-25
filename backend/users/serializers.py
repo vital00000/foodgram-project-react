@@ -1,8 +1,8 @@
-from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
+from djoser.serializers import UserCreateSerializer, UserSerializer
 
-from users.models import User
 from recopes.models import Subscription
+from users.models import User
 
 
 class CustomUserCreateSerializer(UserCreateSerializer):

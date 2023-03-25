@@ -1,9 +1,8 @@
 from rest_framework import routers
 from django.urls import path, include
 
-from users.views import SubscribeView
-
 from api.views import (GetSubscriptionsView, SubscriptionViewSet)
+from users.views import SubscribeView
 
 
 v1_router = routers.DefaultRouter()
