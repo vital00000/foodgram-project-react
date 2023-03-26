@@ -59,7 +59,8 @@ jobs:
             sudo docker pull vital123321/backend:latest
             sudo docker pull vital123321/front:v1
             sudo docker-compose stop
-            sudo docker-compose rm backend
+            sudo docker-compose rm -f backend
+            sudo docker-compose pull backend
             sudo docker-compose rm frontend
             rm .env
             touch .env
