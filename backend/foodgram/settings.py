@@ -10,7 +10,7 @@ SECRET_KEY = ('SECRET_KEY')
 
 # SECURITY WARNING: (
 # Когда поедет на сервер, дебаг нужно выкючить. Оствил тут твои коммент. Помню
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
