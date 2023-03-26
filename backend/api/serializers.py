@@ -4,6 +4,7 @@ from recopes.models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
                             ShopCart, Subscription, Tag)
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
+
 from users.models import User
 from users.serializers import CustomUserCreateSerializer, CustomUserSerializer
 
