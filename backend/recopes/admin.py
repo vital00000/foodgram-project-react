@@ -1,14 +1,6 @@
 from django.contrib import admin
-
-from recopes.models import (
-    Tag,
-    Ingredient,
-    Recipe,
-    IngredientInRecipe,
-    ShopCart,
-    Subscription,
-    Favorite,
-)
+from recopes.models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
+                            ShopCart, Subscription, Tag)
 
 
 @admin.register(Tag)

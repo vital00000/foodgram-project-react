@@ -1,7 +1,6 @@
-from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer, UserSerializer
-
 from recopes.models import Subscription
+from rest_framework import serializers
 from users.models import User
 
 

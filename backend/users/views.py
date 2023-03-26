@@ -1,12 +1,11 @@
+from api.serializers import SubscriptionSerializer
+from django.shortcuts import get_object_or_404
+from recopes.models import Subscription
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
-
-from recopes.models import Subscription
+from rest_framework.views import APIView
 from users.models import User
-from api.serializers import SubscriptionSerializer
 
 
 class SubscribeView(APIView):

@@ -1,6 +1,5 @@
 import django_filters
 from django_filters import rest_framework as filter
-
 from recopes.models import Recipe, Tag
 from users.models import User
 
