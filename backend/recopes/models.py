@@ -181,7 +181,7 @@ class Favorite(models.Model):
                 fields=('user', 'recipe',),
                 name='unique_favorite'
             ),
-        ]
+                 ]
 
     class Meta:
         verbose_name = 'Избранное'
