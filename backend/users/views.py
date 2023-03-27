@@ -9,7 +9,7 @@ from rest_framework.pagination import PageNumberPagination
 from api.serializers import SubscriptionSerializer
 from recopes.models import Subscription
 from users.models import User
-from .views import UserViewSet
+from djoser.views import UserViewSet
 
 
 class SubscribeView(APIView):
