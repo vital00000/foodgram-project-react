@@ -22,8 +22,8 @@ class RecipeFilter(django_filters.FilterSet):
 
 
 class IngredientFilter(django_filters.FilterSet):
-    name = django_filters.ModelChoiceFilter(queryset=Ingredient.objects.all())
+    ingredient = django_filters.ModelChoiceFilter(queryset=Ingredient.objects.all())
 
     class Meta:
         model = Ingredient
-        fields = 'name'
+        fields = 'ingredient'
