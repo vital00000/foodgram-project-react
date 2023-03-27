@@ -22,4 +22,4 @@ class RecipeFilter(django_filters.FilterSet):
 
 
 class IngredientFilter(django_filters.FilterSet):
-    ingredient = django_filters.SearchFilter(queryset=Ingredient.objects.all())
+    ingredient = filter.CharFilter(queryset=Ingredient.objects.all())
