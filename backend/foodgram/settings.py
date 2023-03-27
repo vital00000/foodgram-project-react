@@ -7,6 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: (
 # Ключ обязательно должен читаться из переменных окружени.
 # Оствил тут твои коммент. Помню)
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: (
 # Когда поедет на сервер, дебаг нужно выкючить. Оствил тут твои коммент. Помню
@@ -67,7 +68,6 @@ WSGI_APPLICATION = 'foodgram.wsgi.application'
 
 DATABASES = {
     'default': {
-        'SECRET_KEY': os.getenv('SECRET_KEY'),
         'ENGINE': os.getenv('DB_ENGINE'),
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('POSTGRES_USER'),
