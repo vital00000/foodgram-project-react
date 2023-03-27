@@ -1,10 +1,10 @@
 from djoser.serializers import UserSerializer
 from drf_extra_fields.fields import Base64ImageField
-from recopes.models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
-                            ShopCart, Subscription, Tag)
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 
+from recopes.models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
+                            ShopCart, Subscription, Tag)
 from users.models import User
 from users.serializers import CustomUserCreateSerializer, CustomUserSerializer
 
