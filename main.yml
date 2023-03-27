@@ -57,6 +57,7 @@ jobs:
         script: |
             cd foodgram-project-react/infra
             sudo docker-compose stop
+            sudo docker-compose pull -f frontend
             sudo docker-compose rm -f backend
             sudo docker-compose pull backend
             rm -f .env
