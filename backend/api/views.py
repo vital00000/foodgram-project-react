@@ -1,4 +1,4 @@
-from api.filters import RecipeFilter
+from api.filters import RecipeFilter, IngredientFilter
 from api.permissions import IsAuthorOrReadOnly
 from api.serializers import (FavoriteSerializer, GetRecipeSerializer,
                              GetSubscriptionSerializer, IngredientSerializer,
@@ -38,6 +38,7 @@ class TagViewSet(CreateListRetrieveViewSet):
 class IngredientViewSet(viewsets.ModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
+    filterset_class = RecipeFilter
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
