@@ -1,7 +1,7 @@
 import django_filters
 from django_filters import rest_framework as filter
 
-from recopes.models import IngredientInRecipe, Recipe, Tag
+from recopes.models import Ingredient, Recipe, Tag
 from users.models import User
 
 
@@ -22,8 +22,11 @@ class RecipeFilter(django_filters.FilterSet):
 
 
 class IngredientFilter(django_filters.FilterSet):
-    ingredient = filter.CharFilter(lookup_expr='icontains')
+    name = django_filters.CharFilter(
+        field_name='name',
+        lookup_expr='istartswith'
+    )
 
     class Meta:
-        model = IngredientInRecipe
-        fields = ('ingredient', )
+        model = Ingredient
+        fields = ('name', 'measurement_unit')
