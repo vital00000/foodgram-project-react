@@ -35,4 +35,4 @@ zipp==3.15.0
 gunicorn==20.0.4
 psycopg2-binary==2.8.6
 drf-extra-fields
-Pillow 
+Pillow
