@@ -1,7 +1,7 @@
 import django_filters
 from django_filters import rest_framework as filter
 
-from recopes.models import Ingredient, Recipe, Tag
+from recopes.models import IngredientInRecipe, Recipe, Tag
 from users.models import User
 
 
@@ -25,5 +25,5 @@ class IngredientFilter(django_filters.FilterSet):
     name = django_filters.ModelChoiceFilter(queryset=User.objects.all())
 
     class Meta:
-        model = Ingredient
+        model = IngredientInRecipe
         fields = ('name')
