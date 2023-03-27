@@ -35,7 +35,7 @@ class TagViewSet(CreateListRetrieveViewSet):
     pagination_class = None
 
 
-class IngredientViewSet(CreateListRetrieveViewSet):
+class IngredientViewSet(viewsets.ModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
 
