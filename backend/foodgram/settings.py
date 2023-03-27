@@ -24,10 +24,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'api.apps.ApiConfig',
+    'rest_framework.authtoken',
     'djoser',
     'rest_framework',
     'django_filters',
-    'rest_framework.authtoken',
     'recopes.apps.RecopesConfig',
 ]
 
@@ -133,6 +133,8 @@ AUTH_USER_MODEL = 'users.User'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
