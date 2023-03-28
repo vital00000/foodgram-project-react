@@ -15,7 +15,7 @@ from api.serializers import (FavoriteSerializer, GetRecipeSerializer,
                              GetSubscriptionSerializer, IngredientSerializer,
                              PostFavoriteSerializer, RecipeSerializer,
                              ShoppingCartSerializer, SubscriptionSerializer,
-                             TagSerializer)
+                             TagSerializer, IngredientRecipeSerializer)
 from recopes.models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
                             ShopCart, Subscription, Tag)
 from users.models import User
@@ -37,6 +37,13 @@ class TagViewSet(CreateListRetrieveViewSet):
 
 class IngredientViewSet(viewsets.ModelViewSet):
     queryset = Ingredient.objects.all()
+    serializer_class = IngredientRecipeSerializer
+    filterset_class = IngredientFilter
+    permission_classes = (AllowAny, )
+
+
+class IngredientforRecipeViewSet(viewsets.ModelViewSet):
+    queryset = IngredientInRecipe.objects.all()
     serializer_class = IngredientSerializer
     filterset_class = IngredientFilter
     permission_classes = (AllowAny, )
