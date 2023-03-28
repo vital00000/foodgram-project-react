@@ -6,7 +6,7 @@ from rest_framework.validators import UniqueTogetherValidator
 from recopes.models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
                             ShopCart, Subscription, Tag)
 from users.models import User
-from users.serializers import CustomUserCreateSerializer, CustomUserSerializer
+from users.serializers import CustomUserSerializer
 
 
 class TagSerializer(serializers.ModelSerializer):
