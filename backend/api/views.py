@@ -39,6 +39,7 @@ class IngredientViewSet(viewsets.ModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
     filterset_class = IngredientFilter
+    permission_classes = (AllowAny, )
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
@@ -46,7 +47,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = RecipeFilter
     pagination_class = PageNumberPagination
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (AllowAny, )
 
     def get_queryset(self):
         is_favorited = self.request.query_params.get('is_favorited')
