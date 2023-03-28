@@ -40,6 +40,7 @@ class IngredientViewSet(viewsets.ModelViewSet):
     serializer_class = IngredientSerializer
     filterset_class = IngredientFilter
     permission_classes = (AllowAny, )
+    pagination_class = None
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
