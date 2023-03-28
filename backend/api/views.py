@@ -47,7 +47,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = RecipeFilter
     pagination_class = PageNumberPagination
-    permission_classes = (AllowAny, )
+    permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
         is_favorited = self.request.query_params.get('is_favorited')
