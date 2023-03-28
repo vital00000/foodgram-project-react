@@ -13,7 +13,7 @@ SECRET_KEY = "django-insecure-*ssztd=g@o7n)h^6$=@^qwsf#v3!wy((l@b55&qz_ehm!-74)w
 
 # SECURITY WARNING: (
 # Когда поедет на сервер, дебаг нужно выкючить. Оствил тут твои коммент. Помню
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
