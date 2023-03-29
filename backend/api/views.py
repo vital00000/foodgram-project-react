@@ -49,6 +49,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
     filterset_class = RecipeFilter
     pagination_class = PageNumberPagination
     permission_classes = (IsAuthorOrReadOnly, )
+    is_favorited = filter.BooleanFilter(method='filter_if_favorited')
+    is_in_shooping_cart = filter.BooleanFilter(
+        method='filter_is_in_shooping_cart')
 
     def get_queryset(self):
         is_favorited = self.request.query_params.get('is_favorited')
