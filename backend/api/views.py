@@ -8,6 +8,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import serializers
 
 from api.filters import IngredientFilter, RecipeFilter
 from api.permissions import IsAuthorOrReadOnly
@@ -49,9 +50,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
     filterset_class = RecipeFilter
     pagination_class = PageNumberPagination
     permission_classes = (IsAuthorOrReadOnly, )
-    is_favorited = filter.BooleanFilter(method='filter_if_favorited')
-    is_in_shooping_cart = filter.BooleanFilter(
-        method='filter_is_in_shooping_cart')
+    is_favorited = serializers.SerializerMethodField()
+    is_in_shooping_cart = serializers.SerializerMethodField()
 
     def get_queryset(self):
         is_favorited = self.request.query_params.get('is_favorited')
