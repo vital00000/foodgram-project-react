@@ -112,7 +112,7 @@ class FavoriteViewSet(viewsets.ModelViewSet):
 
 class PostFavoriteView(APIView):
     """ Добавление рецепта в Избранное. """
-    serializer_class = PostFavoriteSerializer
+    serializer_class = FavoriteSerializer
     permission_classes = (IsAuthenticated, )
 
     def post(self, request, id):
