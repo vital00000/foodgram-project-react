@@ -22,7 +22,7 @@ class RecipeFilter(django_filters.FilterSet):
 
     def filter_if_favorited(self, queryset, name, value):
         if value:
-            return queryset.filter(in_favorite__user=self.request.user)
+            return queryset.filter(favorite__user=self.request.user)
         return queryset
 
     def filter_is_in_shooping_cart(self, queryset, name, value):
