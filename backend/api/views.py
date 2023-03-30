@@ -50,8 +50,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
     filterset_class = RecipeFilter
     pagination_class = PageNumberPagination
     permission_classes = (IsAuthorOrReadOnly, )
-    is_favorited = serializers.SerializerMethodField()
-    is_in_shooping_cart = serializers.SerializerMethodField()
 
     def get_queryset(self):
         is_favorited = self.request.query_params.get('is_favorited')
@@ -81,22 +79,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if self.action != 'create':
             return (IsAuthorOrReadOnly(),)
         return super().get_permissions()
-
-    @action(
-        detail=True,
-        methods=['POST', 'DELETE'],
-        permission_classes=(IsAuthenticated,)
-    )
-    def favorite(self, request, pk=None):
-        return self.post_del_recipe(request, pk, PostFavoriteView)
-
-    @action(
-        detail=True,
-        methods=['POST', 'DELETE'],
-        permission_classes=(IsAuthenticated,)
-    )
-    def shopping_cart(self, request, pk):
-        return self.post_del_recipe(request, pk, ShoppingCartView)
 
 
 class SubscriptionViewSet(viewsets.ModelViewSet):

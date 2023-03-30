@@ -171,6 +171,18 @@ class RecipeSerializer(serializers.ModelSerializer):
         ).data
         return representation
 
+    def get_is_favorited(self, obj):
+        user = self.context['request'].user.id
+        recipe = obj.id
+        return Favorite.objects.filter(user_id=user,
+                                       recipe_id=recipe).exists()
+
+    def get_is_in_shopping_cart(self, obj):
+        user = self.context['request'].user.id
+        recipe = obj.id
+        return ShopCart.objects.filter(user_id=user,
+                                       recipe_id=recipe).exists()
+
 
 class FavoriteSerializer(serializers.ModelSerializer):
     """Сериализатор избранного."""
