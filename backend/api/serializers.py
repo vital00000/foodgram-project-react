@@ -67,7 +67,7 @@ class GetRecipeSerializer(serializers.ModelSerializer):
     author = CustomUserSerializer()
     tags = TagSerializer(many=True, read_only=True)
     is_favorited = serializers.SerializerMethodField()
-    is_in_shooping_cart = serializers.SerializerMethodField()
+    is_is_in_shopping_cart = serializers.SerializerMethodField()
 
     class Meta:
         model = Recipe
@@ -81,7 +81,7 @@ class GetRecipeSerializer(serializers.ModelSerializer):
             'cooking_time',
             'image',
             'is_favorited',
-            'is_in_shooping_cart'
+            'is_in_shopping_cart'
         )
         read_only_fields = ('id', 'author',)
 
@@ -96,7 +96,7 @@ class GetRecipeSerializer(serializers.ModelSerializer):
             return False
         return obj.favorite.filter(user=user).exists()
 
-    def get_is_in_shoopping_cart(self, obj):
+    def get_is_in_shopping_cart(self, obj):
         user = self.context['request'].user
         if user.is_anonymous:
             return False
