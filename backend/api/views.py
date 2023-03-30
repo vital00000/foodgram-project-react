@@ -80,6 +80,22 @@ class RecipeViewSet(viewsets.ModelViewSet):
             return (IsAuthorOrReadOnly(),)
         return super().get_permissions()
 
+    @action(
+        detail=True,
+        methods=['POST', 'DELETE'],
+        permission_classes=(IsAuthenticated,)
+    )
+    def favorite(self, request, pk=None):
+        return self.post_del_recipe(request, pk, Favorite)
+
+    @action(
+        detail=True,
+        methods=['POST', 'DELETE'],
+        permission_classes=(IsAuthenticated,)
+    )
+    def shopping_cart(self, request, pk):
+        return self.post_del_recipe(request, pk, ShopCart)
+
 
 class SubscriptionViewSet(viewsets.ModelViewSet):
     queryset = Subscription.objects.all()
