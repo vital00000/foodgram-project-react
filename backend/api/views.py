@@ -15,8 +15,8 @@ from api.permissions import IsAuthorOrReadOnly
 from api.serializers import (FavoriteSerializer, GetRecipeSerializer,
                              GetSubscriptionSerializer, IngredientSerializer,
                              PostFavoriteSerializer, RecipeSerializer,
-                             RecipeFollowSerializer, ShoppingCartSerializer,
-                             SubscriptionSerializer, TagSerializer)
+                             ShoppingCartSerializer, SubscriptionSerializer,
+                             TagSerializer)
 from recopes.models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
                             ShopCart, Subscription, Tag)
 from users.models import User
@@ -50,7 +50,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = RecipeFilter
     pagination_class = PageNumberPagination
-    permission_classes = (AllowAny,)
+    permission_classes = (AllowAny, )
 
     def get_queryset(self):
         is_favorited = self.request.query_params.get('is_favorited')
@@ -84,13 +84,13 @@ class RecipeViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['POST', 'DELETE'],)
     def favorite(self, request, pk):
         if self.request.method == 'POST':
-            return post(request, pk, Favorite, RecipeFollowSerializer)
+            return post(request, pk, Favorite, GetRecipeSerializer)
         return delete(request, pk, Favorite)
 
     @action(detail=True, methods=['POST', 'DELETE'],)
     def shopping_cart(self, request, pk):
         if request.method == 'POST':
-            return post(request, pk, ShopCart, RecipeFollowSerializer)
+            return post(request, pk, ShopCart, GetRecipeSerializer)
         return delete(request, pk, ShopCart)
 
 
