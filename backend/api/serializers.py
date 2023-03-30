@@ -97,6 +97,8 @@ class RecipeSerializer(serializers.ModelSerializer):
     )
     image = Base64ImageField(max_length=None, use_url=True)
     cooking_time = serializers.IntegerField(min_value=1)
+    is_favorited = serializers.SerializerMethodField()
+    is_in_shooping_cart = serializers.SerializerMethodField()
 
     class Meta:
         model = Recipe
@@ -108,7 +110,9 @@ class RecipeSerializer(serializers.ModelSerializer):
             'ingredients',
             'tags',
             'cooking_time',
-            'image'
+            'image',
+            'is_favorited',
+            'is_in_shooping_cart'
         )
         read_only_fields = ('id', 'author', 'tags')
 
