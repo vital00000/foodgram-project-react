@@ -79,7 +79,7 @@ class Recipe(models.Model):
     cooking_time = models.PositiveIntegerField(
         verbose_name='Время приготовления (в минутах)',
     )
-    created_date = models.DateTimeField(
+    pub_date = models.DateTimeField(
         verbose_name='Дата публикации',
         auto_now_add=True,
     )
@@ -87,7 +87,7 @@ class Recipe(models.Model):
     class Meta:
         verbose_name = 'Рецепт'
         verbose_name_plural = 'Рецепты'
-        ordering = ['created_date']
+        ordering = ('pub_date',)
 
     def __str__(self):
         return self.name
