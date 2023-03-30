@@ -80,21 +80,17 @@ class RecipeViewSet(viewsets.ModelViewSet):
             return (IsAuthorOrReadOnly(),)
         return super().get_permissions()
 
-    @action(
-        detail=True,
-        methods=['POST', 'DELETE'],
-        permission_classes=(IsAuthenticated,)
-    )
-    def favorite(self, request, pk=None):
-        return self.post_del_recipe(request, pk, Favorite)
+    @action(detail=True, methods=['POST', 'DELETE'],)
+    def favorite(self, request, pk):
+        if self.request.method == 'POST':
+            return self.post(request, pk, Favorite, RecipeSerializer)
+        return self.delete(request, pk, Favorite)
 
-    @action(
-        detail=True,
-        methods=['POST', 'DELETE'],
-        permission_classes=(IsAuthenticated,)
-    )
+    @action(detail=True, methods=['POST', 'DELETE'],)
     def shopping_cart(self, request, pk):
-        return self.post_del_recipe(request, pk, ShopCart)
+        if request.method == 'POST':
+            return self.post(request, pk, ShopCart, RecipeSerializer)
+        return self.delete(request, pk, ShopCart)
 
 
 class SubscriptionViewSet(viewsets.ModelViewSet):
