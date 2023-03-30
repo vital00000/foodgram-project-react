@@ -49,7 +49,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     filter_backends = (DjangoFilterBackend,)
     filterset_class = RecipeFilter
-    pagination_class = None
+    pagination_class = PageNumberPagination
+    permission_classes = (AllowAny,)
 
     def get_queryset(self):
         is_favorited = self.request.query_params.get('is_favorited')
@@ -75,10 +76,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
             return GetRecipeSerializer
         return RecipeSerializer
 
-    def get_permissions(self):
-        if self.action != 'create':
-            return (IsAuthorOrReadOnly(),)
-        return super().get_permissions()
+    # def get_permissions(self):
+    #    if self.action != 'create':
+    #        return (IsAuthorOrReadOnly(),)
+    #    return super().get_permissions()
 
     @action(detail=True, methods=['POST', 'DELETE'],)
     def favorite(self, request, pk):
