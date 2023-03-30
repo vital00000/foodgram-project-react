@@ -12,8 +12,8 @@ class RecipeFilter(django_filters.FilterSet):
         queryset=Tag.objects.all(),
     )
     is_favorited = filter.BooleanFilter(method='filter_if_favorited')
-    is_in_shooping_cart = filter.BooleanFilter(
-        method='filter_is_in_shooping_cart')
+    is_in_shopping_cart = filter.BooleanFilter(
+        method='filter_is_in_shopping_cart')
     author = django_filters.ModelChoiceFilter(queryset=User.objects.all())
 
     class Meta:
@@ -25,7 +25,7 @@ class RecipeFilter(django_filters.FilterSet):
             return queryset.filter(favorite__user=self.request.user)
         return queryset
 
-    def filter_is_in_shooping_cart(self, queryset, name, value):
+    def filter_is_in_shopping_cart(self, queryset, name, value):
         if value:
             return queryset.filter(shopping_cart__user=self.request.user)
         return queryset
