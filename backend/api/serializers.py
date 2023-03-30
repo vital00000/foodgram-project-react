@@ -60,6 +60,14 @@ class IngredientRecipeSerializer(serializers.ModelSerializer):
         fields = ('id', 'amount', 'recipe')
 
 
+class RecipeFollowSerializer(serializers.ModelSerializer):
+    image = Base64ImageField()
+
+    class Meta:
+        model = Recipe
+        fields = ('id', 'name', 'image', 'cooking_time')
+
+
 class GetRecipeSerializer(serializers.ModelSerializer):
     """ Получение списка рецептов. """
     image = serializers.ImageField()
