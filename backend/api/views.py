@@ -77,7 +77,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action != 'create':
-            return (AllowAny(),)
+            return (IsAuthorOrReadOnly(),)
         return super().get_permissions()
 
     @action(detail=True, methods=['POST', 'DELETE'],)
